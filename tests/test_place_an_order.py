@@ -15,3 +15,4 @@ class TestPlaceAnOrder:
     def test_place_an_order(self, body):
         response=place_an_order()
         assert "track" in response.json()
+        assert response.status_code==201
