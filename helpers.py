@@ -31,13 +31,13 @@ def register_new_courier_and_return_login_password():
     response = requests.post(f"{URL.scooter_url}{URL.courier_url}", data=payload)
 
     # если регистрация прошла успешно (код ответа 201), добавляем в список логин и пароль курьера
-    if response.status_code == 201:
+    if response.status_code == 201 and response.json().get("ok"):
         login_pass.append(login)
         login_pass.append(password)
         login_pass.append(first_name)
 
     # возвращаем список
-    return login_pass
+    return response, login_pass
 
 def courier_login(login, password):
     payload = {"login": login, "password": password}
